@@ -6,15 +6,21 @@ int main () {
     printf("\nHow many numbers of fibonacci u want : ");
     scanf("%d", &n);
 
-    printf("\t%d",a);
-    printf("\t%d",b);
+    printf("\nFibonacci Series:\n");
+
+    printf("%d", a);
+    
+    printf("\t%d", b);
 
     for (int i = 3; i <= n; i++) {
-        c = a + b;
-
+        
+        c = a+b; 
+        
         printf("\t%d", c);
-
+        
         a = b;
+
         b = c;
+
     }
 }

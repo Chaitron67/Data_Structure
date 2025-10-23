@@ -1,0 +1,130 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* front = NULL;
+struct Node* rear = NULL;
+
+int isEmpty() {
+    if (front == NULL) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+
+void enqueue(int data) {
+    struct Node *newNode = (struct Node*) malloc (sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (isEmpty()) {
+        front = newNode;
+        rear = newNode;
+    }
+    else {
+        rear->next = newNode;
+        rear = newNode;
+    }
+
+    printf("\nINSERTED %d ELEMENT", data);
+}
+
+void dequeue() {
+    if (isEmpty()) {
+        printf("\nQueue Underflow !!!");
+    }
+    else {
+        int ele = front->data;
+        struct Node *temp = front;
+        front = front->next;
+        free(temp);
+        if (front == NULL) {
+            rear = NULL;
+        }
+        printf("\nDEQUEUED %d", ele);
+    }
+}
+
+void peek() {
+    if (isEmpty()) {
+        printf("\nQueue is Empty !!!");
+    }
+    else {
+        printf("\nFRONT: %d", front->data);
+    }
+}
+
+void display() {
+    if (isEmpty()) {
+        printf("\nQueue is Empty !!!");
+    }
+    else {
+        struct Node *temp = front;
+        while (temp != NULL) {
+            printf("\t%d", temp->data);
+            temp = temp->next;
+        }
+    }
+}
+
+int main() {
+    int ch, data;
+
+    do {
+        printf("\n\nMain Menu (Queue using Linked List)\n");
+        printf("\n1. Enqueue (Insert)");
+        printf("\n2. Dequeue (Delete)");
+        printf("\n3. Peek (Front element)");
+        printf("\n4. isEmpty");
+        printf("\n5. Display");
+        printf("\n6. Exit");
+        printf("\nEnter choice : ");
+        scanf("%d", &ch);
+
+        switch (ch) {
+            case 1:
+                printf("Enter element to enqueue: ");
+                scanf("%d", &data);
+                enqueue(data);
+                break;
+
+            case 2:
+                dequeue();
+                break;
+
+            case 3:
+                peek();
+                break;
+
+            case 4:
+                if (isEmpty()) {
+                    printf("\nQueue is Empty !!!");
+                } else {
+                    printf("\nQueue is not Empty !!!");
+                }
+                break;
+
+            case 5:
+                display();
+                break;
+
+            case 6:
+                printf("\nExited..!");
+                exit(0);
+
+            default:
+                printf("\nWrong Input!!!");
+        }
+
+        getch();
+    } while (1);
+
+    return 0;
+}
